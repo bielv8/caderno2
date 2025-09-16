@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DER - Sistema de Estoque</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; background: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #333; }
+        .der-diagram { background-color: #f8f9fa; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; white-space: pre-line; border: 2px solid #dee2e6; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .highlight { background-color: #e3f2fd; padding: 10px; border-left: 4px solid #2196f3; margin: 15px 0; }
+        .entity { background-color: #e8f5e8; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗄️ Diagrama Entidade-Relacionamento (DER)</h1>
+        
+        <div class="highlight">
+            <strong>Modelo conceitual do banco de dados do Sistema de Gestão de Estoque</strong>
+        </div>
+
+        <div class="der-diagram">
+┌─────────────────┐       ┌─────────────────────┐       ┌─────────────────────┐
+│     USUARIOS    │       │   MOVIMENTACOES     │       │      PRODUTOS       │
+├─────────────────┤       ├─────────────────────┤       ├─────────────────────┤
+│ id (PK)         │◄─────┐│ id (PK)             │┌─────►│ id (PK)             │
+│ nome            │      ││ produto_id (FK)     ││      │ nome                │
+│ email (UNIQUE)  │      ││ usuario_id (FK)     ││      │ descricao           │
+│ senha_hash      │      ││ tipo                ││      │ validade            │
+│ created_at      │      ││ quantidade          ││      │ unidade             │
+└─────────────────┘      ││ data                ││      │ estoque_minimo      │
+                         │└─────────────────────┘│      │ estoque_atual       │
+                         │        1:N            │      │ created_at          │
+                         └───────────────────────┘      └─────────────────────┘
+                                   1:N
+
+        RELACIONAMENTOS:
+        • 1 USUARIO pode fazer N MOVIMENTACOES
+        • 1 PRODUTO pode ter N MOVIMENTACOES
+        • MOVIMENTACOES liga USUARIOS e PRODUTOS (tabela de relacionamento)
+        </div>
+
+        <h2>📋 Descrição das Entidades</h2>
+
+        <div class="entity">
+            <h3>USUARIOS</h3>
+            <table>
+                <tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr>
+                <tr><td><strong>id</strong></td><td>SERIAL (PK)</td><td>Identificador único do usuário</td></tr>
+                <tr><td>nome</td><td>VARCHAR(100)</td><td>Nome completo do usuário</td></tr>
+                <tr><td>email</td><td>VARCHAR(100) UNIQUE</td><td>Email único para login</td></tr>
+                <tr><td>senha_hash</td><td>VARCHAR(255)</td><td>Hash seguro da senha (scrypt)</td></tr>
+                <tr><td>created_at</td><td>TIMESTAMP</td><td>Data de criação do registro</td></tr>
+            </table>
+        </div>
+
+        <div class="entity">
+            <h3>PRODUTOS</h3>
+            <table>
+                <tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr>
+                <tr><td><strong>id</strong></td><td>SERIAL (PK)</td><td>Identificador único do produto</td></tr>
+                <tr><td>nome</td><td>VARCHAR(150)</td><td>Nome do produto</td></tr>
+                <tr><td>descricao</td><td>TEXT</td><td>Descrição detalhada (opcional)</td></tr>
+                <tr><td>validade</td><td>DATE</td><td>Data de validade (opcional)</td></tr>
+                <tr><td>unidade</td><td>VARCHAR(20)</td><td>Unidade de medida (kg, saco, m³, etc.)</td></tr>
+                <tr><td>estoque_minimo</td><td>INTEGER</td><td>Quantidade mínima para alerta</td></tr>
+                <tr><td>estoque_atual</td><td>INTEGER</td><td>Quantidade atual em estoque</td></tr>
+                <tr><td>created_at</td><td>TIMESTAMP</td><td>Data de criação do registro</td></tr>
+            </table>
+        </div>
+
+        <div class="entity">
+            <h3>MOVIMENTACOES</h3>
+            <table>
+                <tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr>
+                <tr><td><strong>id</strong></td><td>SERIAL (PK)</td><td>Identificador único da movimentação</td></tr>
+                <tr><td>produto_id</td><td>INTEGER (FK)</td><td>Referência ao produto movimentado</td></tr>
+                <tr><td>usuario_id</td><td>INTEGER (FK)</td><td>Referência ao usuário responsável</td></tr>
+                <tr><td>tipo</td><td>VARCHAR(10)</td><td>'entrada' ou 'saida'</td></tr>
+                <tr><td>quantidade</td><td>INTEGER</td><td>Quantidade movimentada</td></tr>
+                <tr><td>data</td><td>TIMESTAMP</td><td>Data e hora da movimentação</td></tr>
+            </table>
+        </div>
+
+        <h2>🔗 Regras de Integridade</h2>
+        <ul>
+            <li><strong>Chaves Primárias:</strong> Campos id em todas as tabelas</li>
+            <li><strong>Chaves Estrangeiras:</strong> 
+                <ul>
+                    <li>movimentacoes.produto_id → produtos.id</li>
+                    <li>movimentacoes.usuario_id → usuarios.id</li>
+                </ul>
+            </li>
+            <li><strong>Constraints:</strong>
+                <ul>
+                    <li>usuarios.email deve ser UNIQUE</li>
+                    <li>movimentacoes.tipo deve ser 'entrada' ou 'saida'</li>
+                    <li>Campos id são NOT NULL e AUTO INCREMENT</li>
+                </ul>
+            </li>
+            <li><strong>Cascata:</strong> ON DELETE CASCADE nas FK</li>
+        </ul>
+
+        <h2>💡 Regras de Negócio Implementadas</h2>
+        <ul>
+            <li>Movimentações de <strong>entrada</strong> aumentam o estoque_atual</li>
+            <li>Movimentações de <strong>saída</strong> diminuem o estoque_atual</li>
+            <li>Sistema gera alertas quando estoque_atual ≤ estoque_minimo</li>
+            <li>Todas as movimentações ficam registradas para auditoria</li>
+            <li>Usuários são identificados em todas as operações</li>
+        </ul>
+    </div>
+</body>
+</html>

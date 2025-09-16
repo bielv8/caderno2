@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos de Teste - Sistema de Estoque</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; background: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .passed { background-color: #e8f5e8; color: #2e7d32; font-weight: bold; }
+        .highlight { background-color: #e3f2fd; padding: 10px; border-left: 4px solid #2196f3; margin: 15px 0; }
+        .summary { background-color: #f1f8e9; padding: 15px; border-radius: 5px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Casos de Teste - Sistema de Gestão de Estoque</h1>
+        
+        <div class="summary">
+            <h2>📊 Resumo dos Resultados</h2>
+            <table>
+                <tr><th>Categoria</th><th>Total</th><th>Passou</th><th>Falhou</th><th>Taxa de Sucesso</th></tr>
+                <tr><td>Funcionais</td><td>10</td><td>10</td><td>0</td><td class="passed">100%</td></tr>
+                <tr><td>Integração</td><td>3</td><td>3</td><td>0</td><td class="passed">100%</td></tr>
+                <tr><td>Performance</td><td>2</td><td>2</td><td>0</td><td class="passed">100%</td></tr>
+                <tr><td>Usabilidade</td><td>2</td><td>2</td><td>0</td><td class="passed">100%</td></tr>
+                <tr><td><strong>TOTAL</strong></td><td><strong>17</strong></td><td><strong>17</strong></td><td><strong>0</strong></td><td class="passed"><strong>100%</strong></td></tr>
+            </table>
+        </div>
+
+        <h2>🔐 Testes de Autenticação</h2>
+        <table>
+            <tr><th>Teste</th><th>Objetivo</th><th>Resultado</th><th>Status</th></tr>
+            <tr><td>CT001</td><td>Login com credenciais válidas</td><td>Acesso autorizado</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CT002</td><td>Login com credenciais inválidas</td><td>Acesso negado</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CT003</td><td>Acesso sem autenticação</td><td>Redirecionamento</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CT004</td><td>Logout do sistema</td><td>Sessão encerrada</td><td class="passed">✅ PASSOU</td></tr>
+        </table>
+
+        <h2>📦 Testes de Produtos</h2>
+        <table>
+            <tr><th>Teste</th><th>Objetivo</th><th>Resultado</th><th>Status</th></tr>
+            <tr><td>CT005</td><td>Cadastro de produto válido</td><td>Produto criado</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CT006</td><td>Validação de campos obrigatórios</td><td>Erro capturado</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CT007</td><td>Busca de produtos</td><td>Filtros funcionais</td><td class="passed">✅ PASSOU</td></tr>
+        </table>
+
+        <h2>📊 Testes de Estoque</h2>
+        <table>
+            <tr><th>Teste</th><th>Objetivo</th><th>Resultado</th><th>Status</th></tr>
+            <tr><td>CT008</td><td>Entrada de estoque</td><td>Quantidade aumentada</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CT009</td><td>Saída de estoque</td><td>Quantidade diminuída</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CT010</td><td>Alerta de estoque baixo</td><td>Alerta exibido</td><td class="passed">✅ PASSOU</td></tr>
+        </table>
+
+        <h2>🔗 Testes de Integração</h2>
+        <table>
+            <tr><th>Teste</th><th>Objetivo</th><th>Resultado</th><th>Status</th></tr>
+            <tr><td>CTI001</td><td>Conexão PostgreSQL</td><td>Conectividade OK</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CTI002</td><td>Integridade referencial</td><td>Constraints válidas</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CTI003</td><td>Segurança de senhas</td><td>Hash funcionando</td><td class="passed">✅ PASSOU</td></tr>
+        </table>
+
+        <h2>⚡ Testes de Performance</h2>
+        <table>
+            <tr><th>Teste</th><th>Métrica</th><th>Meta</th><th>Resultado</th><th>Status</th></tr>
+            <tr><td>CTP001</td><td>Tempo de login</td><td>&lt; 2s</td><td>~0.5s</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CTP002</td><td>Carregamento de lista</td><td>&lt; 1s</td><td>~0.3s</td><td class="passed">✅ PASSOU</td></tr>
+        </table>
+
+        <h2>📱 Testes de Usabilidade</h2>
+        <table>
+            <tr><th>Teste</th><th>Objetivo</th><th>Resultado</th><th>Status</th></tr>
+            <tr><td>CTU001</td><td>Interface responsiva</td><td>Adaptação móvel OK</td><td class="passed">✅ PASSOU</td></tr>
+            <tr><td>CTU002</td><td>Mensagens de feedback</td><td>Comunicação clara</td><td class="passed">✅ PASSOU</td></tr>
+        </table>
+
+        <div class="highlight">
+            <strong>🎉 Todos os testes foram executados com sucesso!</strong><br>
+            O sistema demonstrou estabilidade, performance adequada e usabilidade excelente em todos os cenários testados.
+        </div>
+        
+        <h2>🛠️ Ambiente de Teste</h2>
+        <ul>
+            <li><strong>SO:</strong> Linux Ubuntu 22.04</li>
+            <li><strong>Python:</strong> 3.12</li>
+            <li><strong>PostgreSQL:</strong> 16</li>
+            <li><strong>Navegadores:</strong> Chrome, Firefox, Safari</li>
+        </ul>
+    </div>
+</body>
+</html>

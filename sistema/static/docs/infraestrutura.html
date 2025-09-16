@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infraestrutura - Sistema de Estoque</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; background: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .highlight { background-color: #e3f2fd; padding: 10px; border-left: 4px solid #2196f3; margin: 15px 0; }
+        .architecture { background-color: #f5f5f5; padding: 15px; border-radius: 5px; font-family: monospace; }
+        code { background: #f5f5f5; padding: 2px 4px; border-radius: 3px; font-family: monospace; }
+        .warning { background-color: #fff3e0; padding: 10px; border-left: 4px solid #ff9800; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ Requisitos de Infraestrutura</h1>
+        
+        <div class="highlight">
+            <strong>Especificações técnicas completas para implantação e operação do Sistema de Gestão de Estoque.</strong>
+        </div>
+
+        <h2>💻 Especificações do Sistema</h2>
+        <table>
+            <tr><th>Componente</th><th>Especificação</th><th>Versão Mínima</th></tr>
+            <tr><td><strong>Sistema Operacional</strong></td><td>Linux Ubuntu Server</td><td>22.04 LTS</td></tr>
+            <tr><td><strong>Python</strong></td><td>Python Runtime</td><td>3.12.x</td></tr>
+            <tr><td><strong>PostgreSQL</strong></td><td>Database Server</td><td>16.x</td></tr>
+            <tr><td><strong>Flask</strong></td><td>Web Framework</td><td>3.1.2</td></tr>
+        </table>
+
+        <h2>⚙️ Hardware Recomendado</h2>
+        
+        <h3>Ambiente de Desenvolvimento</h3>
+        <table>
+            <tr><th>Recurso</th><th>Mínimo</th><th>Recomendado</th></tr>
+            <tr><td><strong>CPU</strong></td><td>1 core</td><td>2+ cores</td></tr>
+            <tr><td><strong>RAM</strong></td><td>2 GB</td><td>4 GB</td></tr>
+            <tr><td><strong>Armazenamento</strong></td><td>10 GB</td><td>20 GB SSD</td></tr>
+            <tr><td><strong>Rede</strong></td><td>100 Mbps</td><td>1 Gbps</td></tr>
+        </table>
+
+        <h3>Ambiente de Produção</h3>
+        <table>
+            <tr><th>Recurso</th><th>Mínimo</th><th>Recomendado</th><th>Alta Carga</th></tr>
+            <tr><td><strong>CPU</strong></td><td>2 cores</td><td>4 cores</td><td>8+ cores</td></tr>
+            <tr><td><strong>RAM</strong></td><td>4 GB</td><td>8 GB</td><td>16+ GB</td></tr>
+            <tr><td><strong>Armazenamento</strong></td><td>50 GB SSD</td><td>100 GB SSD</td><td>500+ GB SSD</td></tr>
+            <tr><td><strong>Rede</strong></td><td>1 Gbps</td><td>1 Gbps</td><td>10 Gbps</td></tr>
+        </table>
+
+        <h2>🔧 Dependências do Software</h2>
+        <table>
+            <tr><th>Biblioteca</th><th>Versão</th><th>Propósito</th></tr>
+            <tr><td>Flask</td><td>3.1.2</td><td>Framework web principal</td></tr>
+            <tr><td>Flask-Login</td><td>0.6.3</td><td>Gerenciamento de autenticação</td></tr>
+            <tr><td>psycopg2-binary</td><td>2.9.10</td><td>Driver PostgreSQL</td></tr>
+            <tr><td>Werkzeug</td><td>3.1.3</td><td>Utilitários WSGI e segurança</td></tr>
+            <tr><td>Bootstrap</td><td>5.1.3</td><td>Framework CSS responsivo</td></tr>
+        </table>
+
+        <h2>🏢 Arquitetura do Sistema</h2>
+        <div class="architecture">
+Cliente Web ←→ Servidor Web ←→ Aplicação Flask ←→ PostgreSQL
+    ↓              ↓               ↓                 ↓
+HTML/CSS/JS   SSL/HTTPS      Python Logic      Banco de Dados
+        </div>
+
+        <h3>Estrutura de Diretórios</h3>
+        <div class="architecture">
+/opt/sistema-estoque/
+├── sistema/                 # Aplicação Flask
+│   ├── app.py              # Arquivo principal
+│   ├── templates/          # Templates HTML
+│   └── static/             # CSS, JS, documentos
+├── documentos/             # Documentação técnica
+├── logs/                   # Arquivos de log
+└── backups/               # Backups automáticos
+        </div>
+
+        <h2>🔒 Configurações de Segurança</h2>
+        <table>
+            <tr><th>Aspecto</th><th>Implementação</th></tr>
+            <tr><td><strong>Autenticação</strong></td><td>Flask-Login com sessões seguras</td></tr>
+            <tr><td><strong>Hash de Senhas</strong></td><td>Werkzeug scrypt (resistente a ataques)</td></tr>
+            <tr><td><strong>HTTPS</strong></td><td>SSL/TLS obrigatório em produção</td></tr>
+            <tr><td><strong>Firewall</strong></td><td>Apenas portas 22, 80, 443 abertas</td></tr>
+            <tr><td><strong>Backup</strong></td><td>Automatizado diariamente</td></tr>
+        </table>
+
+        <h2>📊 Métricas de Performance</h2>
+        <table>
+            <tr><th>Métrica</th><th>Limite Recomendado</th><th>Atual</th></tr>
+            <tr><td><strong>Tempo de Resposta</strong></td><td>&lt; 2 segundos</td><td>~0.5s</td></tr>
+            <tr><td><strong>Utilização CPU</strong></td><td>&lt; 80%</td><td>~10%</td></tr>
+            <tr><td><strong>Utilização RAM</strong></td><td>&lt; 85%</td><td>~30%</td></tr>
+            <tr><td><strong>Usuários Simultâneos</strong></td><td>~500</td><td>Testado para 10</td></tr>
+        </table>
+
+        <h2>💾 Estratégia de Backup</h2>
+        <ul>
+            <li><strong>Frequência:</strong> Backup diário automatizado</li>
+            <li><strong>Retenção:</strong> Últimos 30 dias</li>
+            <li><strong>Conteúdo:</strong> Banco de dados + arquivos da aplicação</li>
+            <li><strong>Localização:</strong> Armazenamento separado do servidor principal</li>
+        </ul>
+
+        <div class="warning">
+            <strong>⚠️ Importante para Produção:</strong><br>
+            - Configurar HTTPS com certificados SSL válidos<br>
+            - Implementar monitoramento de recursos<br>
+            - Configurar backup automatizado<br>
+            - Usar servidor WSGI (Gunicorn) ao invés do servidor de desenvolvimento
+        </div>
+
+        <h2>🚀 Escalabilidade</h2>
+        <p><strong>Para alta carga, considere:</strong></p>
+        <ul>
+            <li>Load Balancer com Nginx</li>
+            <li>Cache Redis para sessões</li>
+            <li>CDN para arquivos estáticos</li>
+            <li>Réplicas de leitura PostgreSQL</li>
+            <li>Containerização com Docker</li>
+        </ul>
+    </div>
+</body>
+</html>

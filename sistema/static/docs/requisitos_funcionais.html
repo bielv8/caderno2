@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisitos Funcionais - Sistema de Estoque</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; background: #f4f4f4; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .highlight { background-color: #e3f2fd; padding: 10px; border-left: 4px solid #2196f3; margin: 15px 0; }
+        .status-ok { color: green; font-weight: bold; }
+        code { background: #f5f5f5; padding: 2px 4px; border-radius: 3px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Requisitos Funcionais - Sistema de Gestão de Estoque</h1>
+        
+        <div class="highlight">
+            <strong>Sistema desenvolvido para gestão completa de estoque de materiais de construção, incluindo controle de entrada, saída, alertas automáticos e documentação técnica.</strong>
+        </div>
+        
+        <h2>🎯 Funcionalidades Principais</h2>
+        
+        <h3>1. Sistema de Autenticação</h3>
+        <table>
+            <tr><th>RF</th><th>Funcionalidade</th><th>Status</th></tr>
+            <tr><td>RF001</td><td>Login seguro com validação de credenciais</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF002</td><td>Logout com redirecionamento automático</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF003</td><td>Mensagens de erro para falhas de login</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF004</td><td>Proteção de rotas (acesso apenas logado)</td><td class="status-ok">✅ Implementado</td></tr>
+        </table>
+
+        <h3>2. Dashboard Principal</h3>
+        <table>
+            <tr><th>RF</th><th>Funcionalidade</th><th>Status</th></tr>
+            <tr><td>RF005</td><td>Exibição do nome do usuário logado</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF006</td><td>Menu de navegação completo</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF007</td><td>Acesso rápido aos módulos</td><td class="status-ok">✅ Implementado</td></tr>
+        </table>
+
+        <h3>3. Gestão de Produtos</h3>
+        <table>
+            <tr><th>RF</th><th>Funcionalidade</th><th>Status</th></tr>
+            <tr><td>RF008</td><td>Listagem completa de produtos</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF009</td><td>Busca por nome do produto</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF010</td><td>Cadastro de novos produtos</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF011</td><td>Validação de campos obrigatórios</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF012</td><td>Campos opcionais (descrição, validade)</td><td class="status-ok">✅ Implementado</td></tr>
+        </table>
+
+        <h3>4. Controle de Estoque</h3>
+        <table>
+            <tr><th>RF</th><th>Funcionalidade</th><th>Status</th></tr>
+            <tr><td>RF013</td><td>Movimentações de entrada e saída</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF014</td><td>Atualização automática do estoque</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF015</td><td>Alertas de estoque mínimo</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF016</td><td>Histórico de movimentações</td><td class="status-ok">✅ Implementado</td></tr>
+            <tr><td>RF017</td><td>Rastreabilidade por usuário</td><td class="status-ok">✅ Implementado</td></tr>
+        </table>
+
+        <h2>🔧 Especificações Técnicas</h2>
+        <ul>
+            <li><strong>Backend:</strong> Python 3.12 + Flask</li>
+            <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript, Bootstrap 5</li>
+            <li><strong>Banco:</strong> PostgreSQL 16</li>
+            <li><strong>Autenticação:</strong> Flask-Login com hash seguro</li>
+            <li><strong>Interface:</strong> Responsiva e intuitiva</li>
+        </ul>
+
+        <h2>👤 Usuários de Teste</h2>
+        <table>
+            <tr><th>Nome</th><th>Email</th><th>Senha</th></tr>
+            <tr><td>João Silva</td><td>joao@email.com</td><td>123456</td></tr>
+            <tr><td>Maria Santos</td><td>maria@email.com</td><td>123456</td></tr>
+            <tr><td>Pedro Costa</td><td>pedro@email.com</td><td>123456</td></tr>
+        </table>
+
+        <div class="highlight">
+            <strong>Sistema 100% funcional e pronto para uso!</strong><br>
+            Acesse através do login e explore todas as funcionalidades implementadas.
+        </div>
+    </div>
+</body>
+</html>
