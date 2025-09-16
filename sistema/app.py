@@ -8,7 +8,7 @@ from datetime import datetime
 
 # Configuração da aplicação Flask
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev_secret_key_change_in_production')
+app.config['SECRET_KEY'] = os.environ.get('SESSION_SECRET', 'dev_secret_key_change_in_production')
 
 # Configuração Flask-Login
 login_manager = LoginManager()
