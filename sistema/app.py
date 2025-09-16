@@ -1,23 +1,37 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.middleware.proxy_fix import ProxyFix
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import os
+import logging
 from datetime import datetime
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
 
 # Configuração da aplicação Flask
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SESSION_SECRET', 'dev_secret_key_change_in_production')
+app.secret_key = os.environ.get("SESSION_SECRET")
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)  # needed for url_for to generate with https
+
+# Verificar se a SECRET_KEY está configurada
+if not app.secret_key:
+    print("ERRO: SESSION_SECRET não configurado nas variáveis de ambiente")
+    exit(1)
+
+# Configuração do banco de dados
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if not DATABASE_URL:
+    print("ERRO: DATABASE_URL não configurado nas variáveis de ambiente")
+    exit(1)
 
 # Configuração Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.login_message = 'Por favor, faça login para acessar esta página.'
-
-# Configuração do banco de dados
-DATABASE_URL = os.environ.get('DATABASE_URL')
 
 class User(UserMixin):
     def __init__(self, id, nome, email):
