@@ -1,7 +1,7 @@
 # Requisitos Funcionais - Sistema de Gestão de Estoque
 
 ## Visão Geral
-Sistema web para gestão de estoque de materiais de construção, desenvolvido em Python Flask com banco PostgreSQL.
+Sistema web para gestão de estoque de equipamentos eletrônicos (smartphones, notebooks e smart TVs), desenvolvido em Python Flask com banco PostgreSQL.
 
 ## Funcionalidades Implementadas
 
@@ -16,13 +16,13 @@ Sistema web para gestão de estoque de materiais de construção, desenvolvido e
 - **RF006**: Menu de navegação para todas as funcionalidades
 - **RF007**: Acesso rápido aos módulos principais
 
-### 3. Cadastro de Produtos
-- **RF008**: Listagem completa de produtos com dados do banco
-- **RF009**: Campo de busca por nome do produto
-- **RF010**: Inserção de novos produtos com validações
-- **RF011**: Campos obrigatórios: nome, unidade, estoque mínimo
-- **RF012**: Campos opcionais: descrição, data de validade
-- **RF013**: Indicação visual de produtos com estoque baixo
+### 3. Cadastro de Equipamentos Eletrônicos
+- **RF008**: Listagem completa de equipamentos com dados do banco
+- **RF009**: Campo de busca por nome do equipamento
+- **RF010**: Inserção de novos equipamentos com validações
+- **RF011**: Campos obrigatórios: nome, tipo, unidade, estoque mínimo
+- **RF012**: Campos opcionais: especificações, data de compra
+- **RF013**: Indicação visual de equipamentos com estoque baixo
 
 ### 4. Gestão de Estoque
 - **RF014**: Listagem de produtos ordenada alfabeticamente

@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Produtos - Sistema de Gestão de Estoque{% endblock %}
+{% block title %}Equipamentos - Sistema de Gestão de Eletrônicos{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <h2>Gestão de Produtos</h2>
+        <h2>Gestão de Equipamentos Eletrônicos</h2>
         
         <!-- Busca de produtos -->
         <div class="row mb-3">
             <div class="col-md-6">
                 <form method="GET" class="d-flex">
-                    <input type="text" name="search" class="form-control me-2" placeholder="Buscar produto..." value="{{ search }}">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Buscar equipamento..." value="{{ search }}">
                     <button type="submit" class="btn btn-outline-secondary">Buscar</button>
                 </form>
             </div>
             <div class="col-md-6 text-end">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProduto">
-                    Novo Produto
+                    Novo Equipamento
                 </button>
             </div>
         </div>
@@ -29,7 +29,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Descrição</th>
+                        <th>Tipo</th>
+                        <th>Especificações</th>
                         <th>Unidade</th>
                         <th>Estoque Mín.</th>
                         <th>Estoque Atual</th>
@@ -41,7 +42,8 @@
                     <tr>
                         <td>{{ produto.id }}</td>
                         <td>{{ produto.nome }}</td>
-                        <td>{{ produto.descricao }}</td>
+                        <td>{{ produto.tipo }}</td>
+                        <td>{{ produto.especificacoes }}</td>
                         <td>{{ produto.unidade }}</td>
                         <td>{{ produto.estoque_minimo }}</td>
                         <td>
@@ -67,7 +69,7 @@
         <div class="modal-content">
             <form method="POST" action="{{ url_for('add_produto') }}">
                 <div class="modal-header">
-                    <h5 class="modal-title">Novo Produto</h5>
+                    <h5 class="modal-title">Novo Equipamento</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -76,22 +78,25 @@
                         <input type="text" class="form-control" id="nome" name="nome" required>
                     </div>
                     <div class="mb-3">
-                        <label for="descricao" class="form-label">Descrição:</label>
-                        <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+                        <label for="tipo" class="form-label">Tipo:</label>
+                        <select class="form-select" id="tipo" name="tipo" required>
+                            <option value="">Selecione o tipo...</option>
+                            <option value="smartphone">Smartphone</option>
+                            <option value="notebook">Notebook</option>
+                            <option value="smart_tv">Smart TV</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="validade" class="form-label">Validade:</label>
-                        <input type="date" class="form-control" id="validade" name="validade">
+                        <label for="especificacoes" class="form-label">Especificações:</label>
+                        <textarea class="form-control" id="especificacoes" name="especificacoes" rows="3" placeholder="Ex: Tela: 6.5&quot; | Armazenamento: 256GB | Conectividade: 5G, Wi-Fi 6"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data_compra" class="form-label">Data de Compra:</label>
+                        <input type="date" class="form-control" id="data_compra" name="data_compra">
                     </div>
                     <div class="mb-3">
                         <label for="unidade" class="form-label">Unidade:</label>
                         <select class="form-select" id="unidade" name="unidade" required>
-                            <option value="">Selecione...</option>
-                            <option value="kg">Quilograma (kg)</option>
-                            <option value="saco">Saco</option>
-                            <option value="m³">Metro Cúbico (m³)</option>
-                            <option value="barra">Barra</option>
-                            <option value="milheiro">Milheiro</option>
                             <option value="unidade">Unidade</option>
                         </select>
                     </div>

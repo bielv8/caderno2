@@ -21,22 +21,23 @@
         <h1>🗄️ Diagrama Entidade-Relacionamento (DER)</h1>
         
         <div class="highlight">
-            <strong>Modelo conceitual do banco de dados do Sistema de Gestão de Estoque</strong>
+            <strong>Modelo conceitual do banco de dados do Sistema de Gestão de Equipamentos Eletrônicos</strong>
         </div>
 
         <div class="der-diagram">
 ┌─────────────────┐       ┌─────────────────────┐       ┌─────────────────────┐
-│     USUARIOS    │       │   MOVIMENTACOES     │       │      PRODUTOS       │
+│     USUARIOS    │       │   MOVIMENTACOES     │       │ PRODUTOS (Eletrôn.) │
 ├─────────────────┤       ├─────────────────────┤       ├─────────────────────┤
 │ id (PK)         │◄─────┐│ id (PK)             │┌─────►│ id (PK)             │
 │ nome            │      ││ produto_id (FK)     ││      │ nome                │
-│ email (UNIQUE)  │      ││ usuario_id (FK)     ││      │ descricao           │
-│ senha_hash      │      ││ tipo                ││      │ validade            │
-│ created_at      │      ││ quantidade          ││      │ unidade             │
-└─────────────────┘      ││ data                ││      │ estoque_minimo      │
-                         │└─────────────────────┘│      │ estoque_atual       │
-                         │        1:N            │      │ created_at          │
-                         └───────────────────────┘      └─────────────────────┘
+│ email (UNIQUE)  │      ││ usuario_id (FK)     ││      │ tipo                │
+│ senha_hash      │      ││ tipo                ││      │ especificacoes      │
+│ created_at      │      ││ quantidade          ││      │ data_compra         │
+└─────────────────┘      ││ data                ││      │ unidade             │
+                         │└─────────────────────┘│      │ estoque_minimo      │
+                         │        1:N            │      │ estoque_atual       │
+                         └───────────────────────┘      │ created_at          │
+                                   1:N                  └─────────────────────┘
                                    1:N
 
         RELACIONAMENTOS:
@@ -60,14 +61,15 @@
         </div>
 
         <div class="entity">
-            <h3>PRODUTOS</h3>
+            <h3>PRODUTOS (Equipamentos Eletrônicos)</h3>
             <table>
                 <tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr>
-                <tr><td><strong>id</strong></td><td>SERIAL (PK)</td><td>Identificador único do produto</td></tr>
-                <tr><td>nome</td><td>VARCHAR(150)</td><td>Nome do produto</td></tr>
-                <tr><td>descricao</td><td>TEXT</td><td>Descrição detalhada (opcional)</td></tr>
-                <tr><td>validade</td><td>DATE</td><td>Data de validade (opcional)</td></tr>
-                <tr><td>unidade</td><td>VARCHAR(20)</td><td>Unidade de medida (kg, saco, m³, etc.)</td></tr>
+                <tr><td><strong>id</strong></td><td>SERIAL (PK)</td><td>Identificador único do equipamento</td></tr>
+                <tr><td>nome</td><td>VARCHAR(150)</td><td>Nome do equipamento eletrônico</td></tr>
+                <tr><td>tipo</td><td>VARCHAR(20)</td><td>Tipo: smartphone, notebook, smart_tv</td></tr>
+                <tr><td>especificacoes</td><td>TEXT</td><td>Especificações técnicas (tela, armazenamento, conectividade)</td></tr>
+                <tr><td>data_compra</td><td>DATE</td><td>Data de compra (opcional)</td></tr>
+                <tr><td>unidade</td><td>VARCHAR(20)</td><td>Unidade de medida (sempre "unidade")</td></tr>
                 <tr><td>estoque_minimo</td><td>INTEGER</td><td>Quantidade mínima para alerta</td></tr>
                 <tr><td>estoque_atual</td><td>INTEGER</td><td>Quantidade atual em estoque</td></tr>
                 <tr><td>created_at</td><td>TIMESTAMP</td><td>Data de criação do registro</td></tr>
