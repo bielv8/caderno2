@@ -1,0 +1,133 @@
+Desenvolva um sistema web completo em Python (Flask) com PostgreSQL baseado nos seguintes requisitos:
+
+Contexto
+
+Um comerciante de materiais de construção precisa de um sistema para gestão de estoque, incluindo entrada e saída de produtos, alertas de estoque mínimo, rastreabilidade de movimentações e histórico completo.
+
+Tecnologias obrigatórias
+
+Backend: Python 3.12 + Flask
+
+Frontend: HTML5, CSS3, JavaScript (puro ou com Bootstrap)
+
+Banco de Dados: PostgreSQL 16 (nome: saep_db)
+
+Estrutura do projeto
+
+A saída deve estar organizada em uma pasta compactada contendo:
+
+/sistema → código-fonte completo
+
+app.py (arquivo principal Flask)
+
+/templates (HTMLs)
+
+/static (CSS, JS, imagens)
+
+/models (modelos de banco)
+
+/documentos → arquivos de documentação
+
+requisitos_funcionais.md
+
+DER.png (diagrama entidade-relacionamento)
+
+script_bd.sql (criação e população do BD)
+
+casos_de_teste.md
+
+infraestrutura.md
+
+Funcionalidades exigidas
+
+Lista de requisitos funcionais
+
+Documento descrevendo funcionalidades do sistema.
+
+Modelagem do banco de dados (DER)
+
+Criar modelo com tabelas:
+
+usuarios (id, nome, email, senha hash)
+
+produtos (id, nome, descricao, validade, unidade, estoque_minimo, estoque_atual)
+
+movimentacoes (id, produto_id, usuario_id, tipo [entrada/saida], quantidade, data)
+
+Script SQL
+
+Criação do banco saep_db.
+
+Criação das tabelas.
+
+Inserção de pelo menos 3 registros por tabela.
+
+Interface de autenticação (login/logout)
+
+Login de usuário com validação.
+
+Mensagem de erro em caso de falha.
+
+Logout redirecionando para login.
+
+Página principal do sistema
+
+Exibir nome do usuário logado.
+
+Acesso para Cadastro de Produto, Gestão de Estoque e Documentos.
+
+Cadastro de Produto
+
+Listagem de produtos em tabela (dados carregados do BD).
+
+Campo de busca.
+
+Inserção, edição e exclusão de produtos.
+
+Validações de dados.
+
+Gestão de Estoque
+
+Listar produtos em ordem alfabética.
+
+Seleção de produto + movimentação (entrada/saída).
+
+Inserir data da movimentação.
+
+Verificação de estoque mínimo com alerta automático.
+
+Documentos
+
+Página HTML que mostre:
+
+Requisitos funcionais.
+
+DER (imagem).
+
+Link/download para script SQL.
+
+Casos de teste (em tabela).
+
+Requisitos de infraestrutura.
+
+Casos de teste de software
+
+Documento com descrição de ferramentas, ambiente e casos de teste.
+
+Lista de requisitos de infraestrutura
+
+Incluir:
+
+PostgreSQL 16
+
+Python 3.12 + Flask
+
+Sistema Operacional: Linux Ubuntu 22.04
+
+Regras
+
+O sistema deve ser 100% funcional, pronto para rodar com flask run.
+
+Todo o código deve estar organizado e comentado.
+
+Os documentos devem ser gerados junto ao sistema na pasta /documentos.
