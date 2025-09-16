@@ -11,6 +11,7 @@ from datetime import datetime
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
+# Sistema de Gestão de Estoque - Ferramentas Manuais
 # Configuração da aplicação Flask
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET")
