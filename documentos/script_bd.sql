@@ -1,5 +1,5 @@
 -- Script de Criação e População do Banco de Dados
--- Sistema de Gestão de Estoque - Equipamentos Eletrônicos
+-- Sistema de Gestão de Estoque - Ferramentas Manuais
 -- PostgreSQL 16
 
 -- Criação do banco de dados
@@ -19,13 +19,15 @@ CREATE TABLE usuarios (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de produtos eletrônicos
+-- Tabela de ferramentas manuais
 CREATE TABLE produtos (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
-    tipo VARCHAR(20) NOT NULL,
-    especificacoes TEXT,
-    data_compra DATE,
+    tipo VARCHAR(50) NOT NULL,
+    material VARCHAR(50),
+    peso VARCHAR(20),
+    tamanho VARCHAR(20),
+    caracteristicas TEXT,
     unidade VARCHAR(20) NOT NULL,
     estoque_minimo INTEGER NOT NULL DEFAULT 0,
     estoque_atual INTEGER NOT NULL DEFAULT 0,
@@ -56,25 +58,25 @@ INSERT INTO usuarios (nome, email, senha_hash) VALUES
 ('Maria Santos', 'maria@email.com', 'scrypt:32768:8:1$HwUX21XmfpMbO2KN$2c25d5f7583ed6df0e1ac9a92f55ee09fec7267885dd850b915591d463c19efcc7b00fe47a1faec911dfad992d2066ee577deb76c1e00809692b39b692561592'),
 ('Pedro Costa', 'pedro@email.com', 'scrypt:32768:8:1$HwUX21XmfpMbO2KN$2c25d5f7583ed6df0e1ac9a92f55ee09fec7267885dd850b915591d463c19efcc7b00fe47a1faec911dfad992d2066ee577deb76c1e00809692b39b692561592');
 
--- Produtos eletrônicos (3 de cada tipo: smartphone, notebook, smart_tv)
+-- Ferramentas manuais (martelos, chaves de fenda, alicates, etc.)
 
--- Smartphones
-INSERT INTO produtos (nome, tipo, especificacoes, data_compra, unidade, estoque_minimo, estoque_atual) VALUES 
-('iPhone 15 Pro Max 256GB', 'smartphone', 'Tela: 6.7" Super Retina XDR | Armazenamento: 256GB | Conectividade: 5G, Wi-Fi 6E, Bluetooth 5.3', '2024-01-15', 'unidade', 5, 12),
-('Samsung Galaxy S24 Ultra 512GB', 'smartphone', 'Tela: 6.8" Dynamic AMOLED 2X | Armazenamento: 512GB | Conectividade: 5G, Wi-Fi 7, Bluetooth 5.3', '2024-02-20', 'unidade', 3, 8),
-('Xiaomi 14 Ultra 512GB', 'smartphone', 'Tela: 6.73" AMOLED | Armazenamento: 512GB | Conectividade: 5G, Wi-Fi 7, Bluetooth 5.4', '2024-03-10', 'unidade', 4, 6);
+-- Martelos
+INSERT INTO produtos (nome, tipo, material, peso, tamanho, caracteristicas, unidade, estoque_minimo, estoque_atual) VALUES 
+('Martelo de Aço 500g', 'martelo', 'aço', '500g', '30cm', 'Cabeça de aço forjado, cabo de madeira resistente, ideal para trabalhos pesados', 'unidade', 5, 15),
+('Martelo com Cabo de Madeira', 'martelo', 'madeira/aço', '350g', '28cm', 'Cabo de madeira ergonômico, cabeça de aço temperado, absorção de impacto', 'unidade', 3, 8),
+('Martelo de Borracha 400g', 'martelo', 'borracha/aço', '400g', '25cm', 'Cabeça de borracha para trabalhos delicados, cabo antiderrapante', 'unidade', 4, 6);
 
--- Notebooks  
-INSERT INTO produtos (nome, tipo, especificacoes, data_compra, unidade, estoque_minimo, estoque_atual) VALUES 
-('MacBook Pro 16" M3 Pro 512GB', 'notebook', 'Processador: Apple M3 Pro | RAM: 18GB | Armazenamento: 512GB SSD | Tela: 16.2" Liquid Retina XDR', '2024-01-25', 'unidade', 2, 5),
-('Dell XPS 15 Intel i7 1TB', 'notebook', 'Processador: Intel Core i7-13700H | RAM: 32GB | Armazenamento: 1TB SSD | Tela: 15.6" OLED 3.5K', '2024-02-15', 'unidade', 3, 7),
-('ASUS ROG Strix G15 RTX 4060', 'notebook', 'Processador: AMD Ryzen 9 7940HS | RAM: 16GB | Armazenamento: 512GB SSD | GPU: RTX 4060 8GB', '2024-03-05', 'unidade', 2, 4);
+-- Chaves de Fenda  
+INSERT INTO produtos (nome, tipo, material, peso, tamanho, caracteristicas, unidade, estoque_minimo, estoque_atual) VALUES 
+('Chave de Fenda Isolada 6mm', 'chave_fenda', 'aço/plástico', '120g', '25cm', 'Revestimento isolante até 1000V, ponta magnética, cabo ergonômico', 'unidade', 10, 25),
+('Chave de Fenda Ponta Imantada 8mm', 'chave_fenda', 'aço', '150g', '30cm', 'Ponta imantada para facilitar o trabalho, cabo antiderrapante', 'unidade', 8, 18),
+('Chave de Fenda Phillips 4mm', 'chave_fenda', 'aço', '100g', '20cm', 'Ponta Phillips para parafusos em cruz, acabamento cromado', 'unidade', 12, 20);
 
--- Smart TVs
-INSERT INTO produtos (nome, tipo, especificacoes, data_compra, unidade, estoque_minimo, estoque_atual) VALUES 
-('Samsung Neo QLED 65" QN90C', 'smart_tv', 'Tamanho: 65" | Resolução: 4K Neo QLED | HDR: HDR10+ | Conectividade: Wi-Fi 6, HDMI 2.1, Bluetooth', '2024-01-30', 'unidade', 2, 6),
-('LG OLED 55" C3 Series', 'smart_tv', 'Tamanho: 55" | Resolução: 4K OLED | HDR: Dolby Vision IQ | Conectividade: Wi-Fi 6, HDMI 2.1, Bluetooth 5.1', '2024-02-25', 'unidade', 3, 8),
-('Sony Bravia XR 75" X90L', 'smart_tv', 'Tamanho: 75" | Resolução: 4K LED | HDR: HDR10, Dolby Vision | Conectividade: Wi-Fi 6, HDMI 2.1, Bluetooth 4.2', '2024-03-15', 'unidade', 1, 3);
+-- Alicates e outras ferramentas
+INSERT INTO produtos (nome, tipo, material, peso, tamanho, caracteristicas, unidade, estoque_minimo, estoque_atual) VALUES 
+('Alicate Universal 8"', 'alicate', 'aço', '280g', '20cm', 'Aço carbono temperado, cabo isolado, corte lateral integrado', 'unidade', 6, 12),
+('Chave Inglesa 10"', 'chave_inglesa', 'aço', '420g', '25cm', 'Abertura regulável, acabamento cromado, mandíbulas paralelas', 'unidade', 4, 9),
+('Furadeira Manual com Brocas', 'furadeira', 'metal/plástico', '800g', '35cm', 'Furadeira manual com conjunto de brocas variadas, empunhadura ergonômica', 'unidade', 2, 5);
 
 -- Movimentações
 INSERT INTO movimentacoes (produto_id, usuario_id, tipo, quantidade, data) VALUES 
@@ -102,12 +104,13 @@ ORDER BY m.data DESC;
 
 -- Comentários das tabelas
 COMMENT ON TABLE usuarios IS 'Tabela de usuários do sistema';
-COMMENT ON TABLE produtos IS 'Tabela de equipamentos eletrônicos em estoque';
+COMMENT ON TABLE produtos IS 'Tabela de ferramentas manuais em estoque';
 COMMENT ON TABLE movimentacoes IS 'Tabela de movimentações de entrada e saída';
 
 -- Comentários das colunas
-COMMENT ON COLUMN produtos.tipo IS 'Tipo do produto: smartphone, notebook ou smart_tv';
-COMMENT ON COLUMN produtos.especificacoes IS 'Especificações técnicas: resolução, armazenamento, conectividade';
+COMMENT ON COLUMN produtos.tipo IS 'Tipo da ferramenta: martelo, chave_fenda, alicate, etc.';
+COMMENT ON COLUMN produtos.material IS 'Material da ferramenta: aço, madeira, plástico, borracha, etc.';
+COMMENT ON COLUMN produtos.caracteristicas IS 'Características especiais: ponta magnética, revestimento isolante, etc.';
 COMMENT ON COLUMN produtos.estoque_minimo IS 'Quantidade mínima em estoque para gerar alerta';
 COMMENT ON COLUMN produtos.estoque_atual IS 'Quantidade atual em estoque';
 COMMENT ON COLUMN movimentacoes.tipo IS 'Tipo da movimentação: entrada ou saida';
