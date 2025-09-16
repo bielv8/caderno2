@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Equipamentos - Sistema de Gestão de Eletrônicos{% endblock %}
+{% block title %}Ferramentas - Sistema de Gestão de Ferramentas{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <h2>Gestão de Equipamentos Eletrônicos</h2>
+        <h2>Gestão de Ferramentas Manuais</h2>
         
         <!-- Busca de produtos -->
         <div class="row mb-3">
             <div class="col-md-6">
                 <form method="GET" class="d-flex">
-                    <input type="text" name="search" class="form-control me-2" placeholder="Buscar equipamento..." value="{{ search }}">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Buscar ferramenta..." value="{{ search }}">
                     <button type="submit" class="btn btn-outline-secondary">Buscar</button>
                 </form>
             </div>
             <div class="col-md-6 text-end">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProduto">
-                    Novo Equipamento
+                    Nova Ferramenta
                 </button>
             </div>
         </div>
@@ -30,7 +30,9 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Tipo</th>
-                        <th>Especificações</th>
+                        <th>Material</th>
+                        <th>Peso</th>
+                        <th>Características</th>
                         <th>Unidade</th>
                         <th>Estoque Mín.</th>
                         <th>Estoque Atual</th>
@@ -43,7 +45,9 @@
                         <td>{{ produto.id }}</td>
                         <td>{{ produto.nome }}</td>
                         <td>{{ produto.tipo }}</td>
-                        <td>{{ produto.especificacoes }}</td>
+                        <td>{{ produto.material }}</td>
+                        <td>{{ produto.peso }}</td>
+                        <td>{{ produto.caracteristicas }}</td>
                         <td>{{ produto.unidade }}</td>
                         <td>{{ produto.estoque_minimo }}</td>
                         <td>
@@ -69,7 +73,7 @@
         <div class="modal-content">
             <form method="POST" action="{{ url_for('add_produto') }}">
                 <div class="modal-header">
-                    <h5 class="modal-title">Novo Equipamento</h5>
+                    <h5 class="modal-title">Nova Ferramenta</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -81,18 +85,31 @@
                         <label for="tipo" class="form-label">Tipo:</label>
                         <select class="form-select" id="tipo" name="tipo" required>
                             <option value="">Selecione o tipo...</option>
-                            <option value="smartphone">Smartphone</option>
-                            <option value="notebook">Notebook</option>
-                            <option value="smart_tv">Smart TV</option>
+                            <option value="martelo">Martelo</option>
+                            <option value="chave_fenda">Chave de Fenda</option>
+                            <option value="alicate">Alicate</option>
+                            <option value="chave_inglesa">Chave Inglesa</option>
+                            <option value="furadeira">Furadeira</option>
+                            <option value="parafusadeira">Parafusadeira</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="especificacoes" class="form-label">Especificações:</label>
-                        <textarea class="form-control" id="especificacoes" name="especificacoes" rows="3" placeholder="Ex: Tela: 6.5&quot; | Armazenamento: 256GB | Conectividade: 5G, Wi-Fi 6"></textarea>
+                        <label for="material" class="form-label">Material:</label>
+                        <input type="text" class="form-control" id="material" name="material" placeholder="Ex: aço, madeira, plástico">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="peso" class="form-label">Peso:</label>
+                            <input type="text" class="form-control" id="peso" name="peso" placeholder="Ex: 500g, 1,2kg">
+                        </div>
+                        <div class="col-6">
+                            <label for="tamanho" class="form-label">Tamanho:</label>
+                            <input type="text" class="form-control" id="tamanho" name="tamanho" placeholder="Ex: 30cm, 8 pol">
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="data_compra" class="form-label">Data de Compra:</label>
-                        <input type="date" class="form-control" id="data_compra" name="data_compra">
+                        <label for="caracteristicas" class="form-label">Características:</label>
+                        <textarea class="form-control" id="caracteristicas" name="caracteristicas" rows="3" placeholder="Ex: Ponta magnética, revestimento isolante, cabo ergonômico"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="unidade" class="form-label">Unidade:</label>

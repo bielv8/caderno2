@@ -173,11 +173,14 @@ def documentos():
 @app.route('/api/produtos', methods=['POST'])
 @login_required
 def add_produto():
-    """Adicionar novo produto"""
+    """Adicionar nova ferramenta"""
     try:
         nome = request.form['nome']
-        descricao = request.form['descricao']
-        validade = request.form['validade'] or None
+        tipo = request.form['tipo']
+        material = request.form.get('material', '')
+        peso = request.form.get('peso', '')
+        tamanho = request.form.get('tamanho', '')
+        caracteristicas = request.form.get('caracteristicas', '')
         unidade = request.form['unidade']
         estoque_minimo = int(request.form['estoque_minimo'])
         estoque_atual = int(request.form['estoque_atual'])
@@ -186,15 +189,15 @@ def add_produto():
         if conn:
             cursor = conn.cursor()
             cursor.execute(
-                """INSERT INTO produtos (nome, descricao, validade, unidade, estoque_minimo, estoque_atual) 
-                   VALUES (%s, %s, %s, %s, %s, %s)""",
-                (nome, descricao, validade, unidade, estoque_minimo, estoque_atual)
+                """INSERT INTO produtos (nome, tipo, material, peso, tamanho, caracteristicas, unidade, estoque_minimo, estoque_atual) 
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                (nome, tipo, material, peso, tamanho, caracteristicas, unidade, estoque_minimo, estoque_atual)
             )
             conn.commit()
             conn.close()
-            flash('Produto adicionado com sucesso!', 'success')
+            flash('Ferramenta adicionada com sucesso!', 'success')
     except Exception as e:
-        flash(f'Erro ao adicionar produto: {str(e)}', 'error')
+        flash(f'Erro ao adicionar ferramenta: {str(e)}', 'error')
     
     return redirect(url_for('produtos'))
 
