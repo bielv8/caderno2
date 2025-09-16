@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sistema de Gestão de Estoque{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1>Dashboard</h1>
+        <p class="lead">Bem-vindo, {{ usuario.nome }}!</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h5 class="card-title">Cadastro de Produtos</h5>
+                <p class="card-text">Gerencie os produtos em estoque</p>
+                <a href="{{ url_for('produtos') }}" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h5 class="card-title">Gestão de Estoque</h5>
+                <p class="card-text">Controle entrada e saída de produtos</p>
+                <a href="{{ url_for('estoque') }}" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h5 class="card-title">Documentos</h5>
+                <p class="card-text">Acesse a documentação do sistema</p>
+                <a href="{{ url_for('documentos') }}" class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Produtos - Sistema de Gestão de Estoque{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2>Gestão de Produtos</h2>
+        
+        <!-- Busca de produtos -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form method="GET" class="d-flex">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Buscar produto..." value="{{ search }}">
+                    <button type="submit" class="btn btn-outline-secondary">Buscar</button>
+                </form>
+            </div>
+            <div class="col-md-6 text-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProduto">
+                    Novo Produto
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tabela de produtos -->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Unidade</th>
+                        <th>Estoque Mín.</th>
+                        <th>Estoque Atual</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                    <tr>
+                        <td>{{ produto.id }}</td>
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.descricao }}</td>
+                        <td>{{ produto.unidade }}</td>
+                        <td>{{ produto.estoque_minimo }}</td>
+                        <td>
+                            <span class="badge bg-{% if produto.estoque_atual <= produto.estoque_minimo %}danger{% else %}success{% endif %}">
+                                {{ produto.estoque_atual }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">Editar</button>
+                            <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para adicionar produto -->
+<div class="modal fade" id="modalProduto" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('add_produto') }}">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Produto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição:</label>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="validade" class="form-label">Validade:</label>
+                        <input type="date" class="form-control" id="validade" name="validade">
+                    </div>
+                    <div class="mb-3">
+                        <label for="unidade" class="form-label">Unidade:</label>
+                        <select class="form-select" id="unidade" name="unidade" required>
+                            <option value="">Selecione...</option>
+                            <option value="kg">Quilograma (kg)</option>
+                            <option value="saco">Saco</option>
+                            <option value="m³">Metro Cúbico (m³)</option>
+                            <option value="barra">Barra</option>
+                            <option value="milheiro">Milheiro</option>
+                            <option value="unidade">Unidade</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="estoque_minimo" class="form-label">Estoque Mínimo:</label>
+                            <input type="number" class="form-control" id="estoque_minimo" name="estoque_minimo" min="0" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="estoque_atual" class="form-label">Estoque Atual:</label>
+                            <input type="number" class="form-control" id="estoque_atual" name="estoque_atual" min="0" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

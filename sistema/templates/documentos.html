@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Documentos - Sistema de Gestão de Estoque{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2>Documentação do Sistema</h2>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">📋 Requisitos Funcionais</h5>
+                        <p class="card-text">Documentação completa das funcionalidades do sistema.</p>
+                        <a href="/static/docs/requisitos_funcionais.html" target="_blank" class="btn btn-primary">Visualizar</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">🗄️ Diagrama Entidade-Relacionamento</h5>
+                        <p class="card-text">Modelo visual do banco de dados.</p>
+                        <a href="/static/docs/der.png" target="_blank" class="btn btn-primary">Visualizar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">💾 Script SQL</h5>
+                        <p class="card-text">Script de criação e população do banco de dados.</p>
+                        <a href="/static/docs/script_bd.sql" target="_blank" class="btn btn-primary">Download</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">🧪 Casos de Teste</h5>
+                        <p class="card-text">Documentação dos testes realizados no sistema.</p>
+                        <a href="/static/docs/casos_de_teste.html" target="_blank" class="btn btn-primary">Visualizar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">🏗️ Requisitos de Infraestrutura</h5>
+                        <p class="card-text">Especificações técnicas do sistema.</p>
+                        <a href="/static/docs/infraestrutura.html" target="_blank" class="btn btn-primary">Visualizar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

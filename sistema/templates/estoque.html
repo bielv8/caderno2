@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}Estoque - Sistema de Gestão de Estoque{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2>Gestão de Estoque</h2>
+        
+        <!-- Alertas de estoque baixo -->
+        {% if alertas %}
+        <div class="alert alert-warning" role="alert">
+            <h5>⚠️ Produtos com estoque baixo:</h5>
+            <ul class="mb-0">
+                {% for produto in alertas %}
+                <li>{{ produto.nome }} - Estoque: {{ produto.estoque_atual }} (Mínimo: {{ produto.estoque_minimo }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalMovimentacao" data-tipo="entrada">
+                    Entrada de Estoque
+                </button>
+                <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#modalMovimentacao" data-tipo="saida">
+                    Saída de Estoque
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tabela de produtos -->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Unidade</th>
+                        <th>Estoque Atual</th>
+                        <th>Estoque Mínimo</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                    <tr>
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.unidade }}</td>
+                        <td>{{ produto.estoque_atual }}</td>
+                        <td>{{ produto.estoque_minimo }}</td>
+                        <td>
+                            {% if produto.estoque_atual <= produto.estoque_minimo %}
+                                <span class="badge bg-danger">Estoque Baixo</span>
+                            {% else %}
+                                <span class="badge bg-success">OK</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para movimentação -->
+<div class="modal fade" id="modalMovimentacao" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('add_movimentacao') }}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Movimentação de Estoque</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="tipo" name="tipo">
+                    
+                    <div class="mb-3">
+                        <label for="produto_id" class="form-label">Produto:</label>
+                        <select class="form-select" id="produto_id" name="produto_id" required>
+                            <option value="">Selecione o produto...</option>
+                            {% for produto in produtos %}
+                            <option value="{{ produto.id }}">{{ produto.nome }} ({{ produto.unidade }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="quantidade" class="form-label">Quantidade:</label>
+                        <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data da Movimentação:</label>
+                        <input type="datetime-local" class="form-control" id="data" name="data" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnConfirmar">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Configurar data atual como padrão
+    const dataInput = document.getElementById('data');
+    const now = new Date();
+    dataInput.value = now.toISOString().slice(0, 16);
+    
+    // Configurar modal baseado no tipo de movimentação
+    const modal = document.getElementById('modalMovimentacao');
+    modal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        const tipo = button.getAttribute('data-tipo');
+        
+        const modalTitle = modal.querySelector('#modalTitle');
+        const tipoInput = modal.querySelector('#tipo');
+        const btnConfirmar = modal.querySelector('#btnConfirmar');
+        
+        tipoInput.value = tipo;
+        
+        if (tipo === 'entrada') {
+            modalTitle.textContent = 'Entrada de Estoque';
+            btnConfirmar.className = 'btn btn-success';
+            btnConfirmar.textContent = 'Confirmar Entrada';
+        } else {
+            modalTitle.textContent = 'Saída de Estoque';
+            btnConfirmar.className = 'btn btn-danger';
+            btnConfirmar.textContent = 'Confirmar Saída';
+        }
+    });
+});
+</script>
+{% endblock %}
